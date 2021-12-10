@@ -17,25 +17,37 @@ public class Task1 {
         for (int i = 0; i < mass.length; i++) {
             mass[i] = rn.nextInt(10) + 1;
         }
-        System.out.println("massive is full" + Arrays.toString(mass));
+        System.out.println("array is full" + Arrays.toString(mass));
 
         System.out.println("Enter a number: ");
         Scanner scanner = new Scanner(System.in);
         int numb = scanner.nextInt();
+        int count = 0; //the number of matches of the entered number
         boolean numbIn = false;
 
         for (int i = 0; i < mass.length; i++) {
             if (numb == mass[i]) {
-                mass[i] = 0;
+                count++;
                 numbIn = true;
             }
         }
+        System.out.println("count " + count);
 
+        int l = mass.length - count; //size of new array
+        int[] array2 = new int[l];
+        int n = 0; ////second array index
+
+        for (int i = 0; i < mass.length; i++) {
+            if ((mass[i] != numb) && (n < l)) {
+                array2[n] = mass[i];
+                n++;
+            }
+        }
 
         if (numbIn) {
-            System.out.println("The number " + numb + " deleted from massive. The new massive is " + Arrays.toString(mass));
+            System.out.println("The number " + numb + " deleted from array. The new array is " + Arrays.toString(array2));
         } else {
-            System.out.println("The number " + numb + " doesn't exist in massive");
+            System.out.println("The number " + numb + " doesn't exist in array");
         }
 
     }

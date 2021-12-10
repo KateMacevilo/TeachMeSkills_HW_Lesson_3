@@ -1,41 +1,50 @@
 package com.teachmeskills.lesson_3;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
- * Create and fill an array with a random number and display the maximum, minimum, and average values.
- * 	Use the Math.random() method to generate a random number.
- * 	Let it be possible to create an array of arbitrary size.
- * 	Let the size of the array be entered from the console.
+ * Create 2 arrays of 5 numbers.
+ * 	Output the arrays to the console in two separate lines.
+ * 	Calculate the arithmetic mean of the elements of each array and report for which of the arrays the value is greater than
+ * 	(or report that their arithmetic averages are equal)
  */
 public class Task3 {
     public static void main(String[] args) {
-        System.out.println("Introduce the size of massive: ");
-        Scanner scanner = new Scanner(System.in);
-        int sizeMassive = scanner.nextInt();
-        int[] mass = new int[sizeMassive];
+        int[] mass1 = new int[5];
+        int[] mass2 = new int[5];
+        introduceArray(mass1);
+        introduceArray(mass2);
 
-        for(int i = 0; i < mass.length; i++){
-            // Math.random() возвращает случайное double значение с положительным знаком в диапазоне
-            // больше или равно 0.0 и меньше 1.0 (0.0 <= Math.random() < 1.0).
-            mass[i] = (int) (Math.random()*11); //
+        System.out.println("array 1 = "+ Arrays.toString(mass1));
+        System.out.println("array 2 = "+ Arrays.toString(mass2));
+        float mediumMass1 = calculate(mass1);
+        float mediumMass2 = calculate(mass2);
+        System.out.println("The arithmetic mean of the first array = "+ mediumMass1);
+        System.out.println("The arithmetic mean of the second array = "+ mediumMass2);
+
+        if (mediumMass1 < mediumMass2) {
+            System.out.println("The arithmetic mean of the second array is greater than the first");
+        } else if (mediumMass2 < mediumMass1) {
+            System.out.println("The arithmetic mean of the first array is greater than the second");
+        } else if (mediumMass2 == mediumMass1){
+            System.out.println("The arithmetic mean of the two arrays are the same");
         }
-        System.out.println("massive = "+ Arrays.toString(mass));
+    }
 
-        int max = 0;
-        int min = 0;
+    static void introduceArray(int [] array){
+        for(int i = 0; i < array.length; i++){
+            array[i] = (int) (Math.random()*11);
+        }
+    }
+
+    static float calculate (int [] array){
+        int summ = 0;
         float medium = 0.0f;
-
-        Arrays.sort(mass);
-        max = mass[mass.length-1];
-        min = mass[0];
-        int sum = 0;
-        for(int i = 0; i < mass.length; i++){
-            sum += mass[i];
+        for(int i = 0; i < array.length; i++){
+            summ += array[i];
         }
+        medium = (float) summ / array.length;
+        return medium;
 
-        medium = (float) sum / mass.length;
-        System.out.println("max = "+ max +" "+ "medium = " + medium +" "+ "minimum = "+ min);
     }
 }

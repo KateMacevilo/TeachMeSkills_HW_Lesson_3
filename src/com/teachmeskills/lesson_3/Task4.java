@@ -1,50 +1,60 @@
 package com.teachmeskills.lesson_3;
 
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
- * Create 2 arrays of 5 numbers.
- * 	Output the arrays to the console in two separate lines.
- * 	Calculate the arithmetic mean of the elements of each array and report for which of the arrays the value is greater than
- * 	(or report that their arithmetic averages are equal)
+ * Create an array of n random integers and display it on the screen.
+ * Let the size of the array be set from the console and the size of the array
+ * can be greater than 5 and less than or equal to 10.
+ * If the user entered a wrong number, print a message about it and ask the user to enter it again.
+ * Create a second array only from even elements of the first array, if there are any, and display it.
  */
 public class Task4 {
     public static void main(String[] args) {
-        int[] mass1 = new int[5];
-        int[] mass2 = new int[5];
-        introduceMassive(mass1);
-        introduceMassive(mass2);
 
-        System.out.println("massive 1 = "+ Arrays.toString(mass1));
-        System.out.println("massive 2 = "+ Arrays.toString(mass2));
-        float mediumMass1 = calculate(mass1);
-        float mediumMass2 = calculate(mass2);
-        System.out.println("The arithmetic mean of the first array = "+ mediumMass1);
-        System.out.println("The arithmetic mean of the second array = "+ mediumMass2);
+        System.out.println("Introduce a size of array: ");
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        boolean result = true;
+        Random rn = new Random();
 
-        if (mediumMass1 < mediumMass2) {
-            System.out.println("The arithmetic mean of the second array is greater than the first");
-        } else if (mediumMass2 < mediumMass1) {
-            System.out.println("The arithmetic mean of the first array is greater than the second");
-        } else if (mediumMass2 == mediumMass1){
-            System.out.println("The arithmetic mean of the two arrays are the same");
+        while (result) {
+            if ((n > 5) && (n <= 10)) {
+                int[] array1 = new int[n];
+
+                for (int i = 0; i < array1.length; i++) {
+                    array1[i] = rn.nextInt(10) + 1;
+                }
+                result = false;
+                System.out.println(Arrays.toString(array1));
+
+                int c = 0; //number of even numbers
+                for (int i = 0; i < array1.length; i++) {
+                    if (array1[i] % 2 == 0) {
+                        c++;
+                    }
+                }
+                System.out.println("c = " + c);
+
+
+                int nn = 0; //second array index
+                int[] array2 = new int[c];
+                for (int i = 0; i < array1.length; i++) {
+                    if ((array1[i] % 2 == 0) && (nn < c)) {
+                        array2[nn] = array1[i];
+                        nn++;
+                    }
+                }
+
+                System.out.println("new array is " + Arrays.toString(array2));
+
+            } else {
+                System.out.println("introduce a number from 5 to 10: ");
+                n = scanner.nextInt();
+            }
         }
-    }
-
-    static void introduceMassive (int [] mass){
-        for(int i = 0; i < mass.length; i++){
-            mass[i] = (int) (Math.random()*11);
-        }
-    }
-
-    static float calculate (int [] mass){
-        int summ = 0;
-        float medium = 0.0f;
-        for(int i = 0; i < mass.length; i++){
-            summ += mass[i];
-        }
-        medium = (float) summ / mass.length;
-        return medium;
-
+        System.out.println("end");
     }
 }

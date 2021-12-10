@@ -18,16 +18,16 @@ public class Task0 {
         for (int i = 0; i < values.length; i++) {
             values[i] = rn.nextInt(10) + 1;
         }
-        System.out.println("massive is full" + Arrays.toString(values));
+        System.out.println("array is full" + Arrays.toString(values));
 
         System.out.println("Enter a number: ");
         Scanner scanner = new Scanner(System.in);
         int numb = scanner.nextInt();
 
         if (getTrue(values, numb)) {
-            System.out.println("The number " + numb + " exists in massive");
+            System.out.println("The number " + numb + " exists in array");
         } else {
-            System.out.println("The number " + numb + " doesn't exist in massive");
+            System.out.println("The number " + numb + " doesn't exist in array");
         }
 
     }
